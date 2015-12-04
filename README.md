@@ -7,7 +7,9 @@ This project involves implementation of the consistent hashing to implement load
 Description : 
 
 1. The implementation allows dynamic addition and deletion of Redis instances into the system.(For our tests, we had used Redis servers deployed on Amazon EC2 instances.)
+
 2. The Jedis Java library is used as a client for communicating and performing CRUD operations on Redis instances.
+
 3. RedisServer.java provides the implementation for consistent Hashing. 
    It offers the following functionalities : 
    a. Addition of nodes.
@@ -18,11 +20,17 @@ Description :
    f. Getting a list of all the key-value pairs present in the cluster.
    g. Getting a list of all the key-value pairs from a single node in the cluster.
    h. Finding the node to which a key belongs to.
+
 4. The hashing algorithm used for generating hashes is Murmur Hash. This algorithm was chosen since it resulted in unpredictable hash generation even for keys which are almost similar. Algorithms like SHA-256 and MD5 resulted in generating hashes which were almost similar for similar keys. After using murmur Hash, we were able to minimize collisions in the cluster.
+
 5. Replication is enabled in the system. User can add a node and specify a number of replicas. A hash value is generated for each replica but the data is stored on the same node for whom replicas are created. By using replication, we can implement more uniform distribution of keys by distributing the nodes in an almost equal manner across the hash circle.
+
 6. A REST based web service is used for communication between the user interface and the RedisServer class. The RedisWebService provides endpoints for communicating with the RedisServer class and manipulating keys and nodes in the cluster.
+
 7. Home.jsp is the front end which communicates with RedisWebService via AJAX POST/GET calls using JQuery and HTML.
+
 8. On the front, we can generate CSV reports to provide summary and detailed reports about nodes and data in the cluster.
+
 9. There is an option provided on Home.jsp to add a URL as a key. If this option is selected, the value is auto-populated as the HTML content of the page at that URL. 
 
 # UI Screens
